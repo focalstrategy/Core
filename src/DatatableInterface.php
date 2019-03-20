@@ -4,5 +4,5 @@ namespace FocalStrategy\Core;
 
 interface DatatableInterface
 {
-    public function render(string $view, array $with);
+    public function render($view, $data = [], $mergeData = []);
 }
