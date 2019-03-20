@@ -10,6 +10,7 @@ use View;
 class Button implements Renderable, ReceivesData
 {
     protected $text;
+    protected $icon;
     protected $action_type;
     protected $url_template;
     protected $data_attributes = [];
@@ -45,6 +46,16 @@ class Button implements Renderable, ReceivesData
         }
 
         return $this;
+    }
+
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon)
+    {
+        $this->icon = $icon;
     }
 
     public function getText() : string
@@ -126,6 +137,6 @@ class Button implements Renderable, ReceivesData
 
     public function render()
     {
-        return view('_components.button')->with('button', $this);
+        return view('core::button')->with('button', $this);
     }
 }

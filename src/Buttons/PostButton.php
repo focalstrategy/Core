@@ -16,7 +16,7 @@ class PostButton extends Button
 
     public function render()
     {
-        return view('_components.post_button')->with('button', $this);
+        return view('core::post_button')->with('button', $this);
     }
 
     public function data()

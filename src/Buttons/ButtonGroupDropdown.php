@@ -68,6 +68,6 @@ class ButtonGroupDropdown implements Renderable
 
     public function render()
     {
-        return view('_components.button_group_dropdown')->with('button', $this);
+        return view('core::button_group_dropdown')->with('button', $this);
     }
 }

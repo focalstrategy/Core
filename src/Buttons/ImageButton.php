@@ -16,7 +16,7 @@ class ImageButton extends Button
 
     public function render()
     {
-        return view('_components.image_button')->with('button', $this);
+        return view('core::image_button')->with('button', $this);
     }
 
     public function getImage()
