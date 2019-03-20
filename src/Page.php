@@ -4,6 +4,7 @@ namespace FocalStrategy\Core;
 
 use App\Berry\Helpers\Renderable as RenderableComponent;
 use FocalStrategy\Core\BaseBtnType;
+use FocalStrategy\Core\Buttons\Button;
 use FocalStrategy\Core\DatatableInterface;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
