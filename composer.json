@@ -1,0 +1,19 @@
+{
+    "name": "focalstrategy/core",
+    "description": "Core Library for Focal Strategy's components",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Shane Glee",
+            "email": "shane@focalstrategy.com"
+        }
+    ],
+    "require": {
+        "myclabs/php-enum": "^1.5"
+    },
+    "autoload": {
+        "psr-4": {
+          "FocalStrategy\\Core\\": "src"
+        }
+    }
+}
