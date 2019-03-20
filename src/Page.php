@@ -167,4 +167,18 @@ class Page implements Renderable
         ->with($this->with)
         ->render();
     }
+
+    public function __call($name, $args)
+    {
+        if ($name == 'with') {
+            if (count($args) > 0) {
+                if (count($args) > 1) {
+                    $name .= 'Named';
+                } else {
+                    $name .= 'Array';
+                }
+            }
+            return call_user_func_array(array($this, $name), $args);
+        }
+    }
 }
