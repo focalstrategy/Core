@@ -2,11 +2,13 @@
 
 namespace FocalStrategy\Core;
 
+use App\Berry\Helpers\Renderable as RenderableComponent;
+use FocalStrategy\Core\BaseBtnType;
+use FocalStrategy\Core\DatatableInterface;
+use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection as SupportCollection;
-use Illuminate\Contracts\Support\Renderable;
 use View;
-use App\Berry\Helpers\Renderable as RenderableComponent;
 
 class Page implements Renderable
 {
@@ -52,7 +54,7 @@ class Page implements Renderable
         $this->hide_side_bar = $hide_side_bar;
     }
 
-    public function addButton($text, $route, BtnType $type)
+    public function addButton($text, $route, BaseBtnType $type)
     {
         $this->addRenderable(new Button($text, $route, $type));
     }
@@ -62,7 +64,7 @@ class Page implements Renderable
         $this->renderables[] = $renderable;
     }
 
-    public function withTable(DataTable $data_table)
+    public function withTable(DatatableInterface $data_table)
     {
         $this->data_table = $data_table;
     }
@@ -78,26 +80,6 @@ class Page implements Renderable
     public function breadcrumb(string $text, string $link = '')
     {
         $this->breadcrumbs[] = [$link, $text];
-    }
-
-    public function withVoArray(array $data)
-    {
-        foreach ($data as $key => $value) {
-            $this->checkAllowed($value);
-        }
-
-        $this->with = array_merge($this->with, $data);
-
-        return $this;
-    }
-
-    public function withVoNamed($key, $value)
-    {
-        $this->checkAllowed($value);
-
-        $this->with[$key] = $value;
-
-        return $this;
     }
 
     public function withArray(array $data)
@@ -183,42 +165,5 @@ class Page implements Renderable
         return View::make($this->view)
         ->with($this->with)
         ->render();
-    }
-
-    //Buttons
-    //Create a Template and include the view
-
-    public function __call($name, $args)
-    {
-        if ($name == 'with' || $name == 'withVo') {
-            if (count($args) > 0) {
-                if (count($args) > 1) {
-                    $name .= 'Named';
-                } else {
-                    $name .= 'Array';
-                }
-            }
-            return call_user_func_array(array($this, $name), $args);
-        }
-    }
-
-    private function checkAllowed($data)
-    {
-        if (is_array($data)) {
-            if (count($data) > 0) {
-                if (!(array_values($array)[0] instanceof ViewObject)) {
-                    $this->non_view_object = true;
-                }
-            }
-        }
-
-        if ($data instanceof EloquentCollection
-            || $data instanceof SupportCollection) {
-            if (count($data) > 0) {
-                if (!($data->first() instanceof ViewObject)) {
-                    $this->non_view_object = true;
-                }
-            }
-        }
     }
 }
