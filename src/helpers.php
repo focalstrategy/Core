@@ -6,3 +6,14 @@ if (!function_exists('view')) {
         return View::make($template, $with);
     }
 }
+
+if (!function_exists('collect')) {
+    function collect(array $result = null)
+    {
+        if ($result === null) {
+            $result = [];
+        }
+
+        return new Illuminate\Database\Eloquent\Collection($result);
+    }
+}
